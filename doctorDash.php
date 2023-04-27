@@ -19,22 +19,50 @@ require ("head.php");
 	</div>
 	<!--/Pre Loader -->
 	
+	<nav class="navbar navbar-default">
+		<div class="container-fluid nav d-flex justify-content-between">
+			<!-- <ul class="" > -->
+				<div>
+					<li class="nav-item">
+						<div class="responsive-logo text-dark bg-dark">
+							<a href="index.html" class="text-dark p-3"><img src="images/logo.png" class="ayushya-logo" alt="logo"></a>
+						</div>
+					</li>			
+				</div>
+				<div>
+					<li class="nav-item">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+							aria-haspopup="true" aria-expanded="false">
+							<span class="ti-user"></span>
+						</a>
+						<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
+							<h5><?php  echo $_SESSION['name']; ?></h5>
+							
+							<a class="dropdown-item" href="logout.php">
+								<span class="ti-power-off"></span> Logout</a>
+						</div>
+					</li>
+				</div>
+			<!-- </ul> -->
+
+		</div>
+	</nav>
 	<div class="wrapper">
 		<!-- Sidebar -->
 		<?php
-		include_once ("doctor-nav.php");
+		// include_once ("doctor-nav.php");
 		?>
 		<!-- /Sidebar -->
 		<!-- Page Content -->
 		<div id="content">
 			<!-- Top Navigation -->
 			<?php
-				include_once ("top-nav.php");
+				// include_once ("top-nav.php");
 			?>
 			<!-- /Top Navigation -->
 			<!-- Breadcrumb -->
 			<!-- Page Title -->
-			<div class="row no-margin-padding">
+			<!-- <div class="row no-margin-padding">
 				<div class="col-md-6">
 					<h3 class="block-title">Quick Statistics</h3>
 				</div>
@@ -48,17 +76,15 @@ require ("head.php");
 						<li class="breadcrumb-item active">Dashboard</li>
 					</ol>
 				</div>
-			</div>
+			</div> -->
 			<!-- /Page Title -->
 
 			<!-- /Breadcrumb -->
 			<!-- Main Content -->
 			<div class="container-fluid home">
-
-
-				<div class="row">
+				<!-- <div class="row"> -->
 					<!-- Widget Item -->
-					<div class="col-md-4">
+					<!-- <div class="col-md-4">
 						<div class="widget-area proclinic-box-shadow color-red">
 							<div class="widget-left">
 								<span class="ti-user"></span>
@@ -69,10 +95,10 @@ require ("head.php");
 								<p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- /Widget Item -->
 					<!-- Widget Item -->
-					<div class="col-md-4">
+					<!-- <div class="col-md-4">
 						<div class="widget-area proclinic-box-shadow color-green">
 							<div class="widget-left">
 								<span class="ti-bar-chart"></span>
@@ -83,10 +109,10 @@ require ("head.php");
 								<p class="inc-dec mb-0"><span class="ti-angle-down"></span> -15% Decreased</p>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- /Widget Item -->
 					<!-- Widget Item -->
-					<div class="col-md-4">
+					<!-- <div class="col-md-4">
 						<div class="widget-area proclinic-box-shadow color-yellow">
 							<div class="widget-left">
 								<span class="ti-money"></span>
@@ -97,9 +123,9 @@ require ("head.php");
 								<p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- /Widget Item -->
-				</div>
+				<!-- </div> -->
 
 
 				<div class="row">
@@ -108,158 +134,20 @@ require ("head.php");
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Appointments</h3>
 							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
+								<table class="table table-bordered table-striped" id="appointments-table">
 									<thead>
 										<tr>
-											<th>Patient Name</th>
-											<th>Doctor</th>
-											<th>Check-Up</th>
-											<th>Date</th>
-											<th>Time</th>
-											<th>Status</th>
+											<th id="sr-no-th">Sr. No</th>
+											<th id="patient-name-th">Patient Name</th>
+											<!-- <th>Doctor</th> -->
+											<th id="patient-gender-th">Gender</th>
+											<th id="patient-complaint-th">Complaint</th>
+											<th id="action-th">Actions</th>
+											<!-- <th>Status</th> -->
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>Rajesh</td>
-											<td>Manoj Kumar</td>
-											<td>Dental</td>
-											<td>12-10-2018</td>
-											<td>12:10PM</td>
-											<td>
-												<span class="badge badge-success">Completed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Riya</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:10PM</td>
-											<td>
-												<span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Rajesh</td>
-											<td>Manoj Kumar</td>
-											<td>Dental</td>
-											<td>12-10-2018</td>
-											<td>12:10PM</td>
-											<td>
-												<span class="badge badge-success">Completed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Riya</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:10PM</td>
-											<td>
-												<span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-                                        <tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-                                            <span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-                                        <tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-                                        <tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-                                        <tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-                                            <span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-                                        <tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-                                        <tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-                                        <tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-                                        <tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
+									<tbody id="appointment-table-body">
+										
 									</tbody>
 								</table>
 							</div>
@@ -268,64 +156,6 @@ require ("head.php");
 					<!-- /Widget Item -->
 				</div>
 
-				<div class="row">
-					<!-- Widget Item -->
-					<div class="col-sm-6">
-						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Appointments Status</h3>
-							<div id="donutMorris" class="chart-home"></div>
-						</div>
-					</div>
-					<!-- /Widget Item -->
-					<!-- Widget Item -->
-					<div class="col-md-6">
-						<div class="widget-area-2 progress-status proclinic-box-shadow">
-							<h3 class="widget-title">Doctors Availability</h3>
-							<div class="table-responsive">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Doctor</th>
-											<th>Speciality</th>
-											<th>Availability</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Rajesh</td>
-											<td>Dental</td>
-											<td>
-												<span class="badge badge-success">Available</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Riya</td>
-											<td>Ortho</td>
-											<td>
-												<span class="badge badge-warning">On Leave</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Siri</td>
-											<td>Skin</td>
-											<td>
-												<span class="badge badge-danger">Not Available</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Rajesh</td>
-											<td>Dental</td>
-											<td>
-												<span class="badge badge-success">Available</span>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-
-						</div>
-					</div>
-					<!-- /Widget Item -->
 
 				</div>
 
@@ -339,6 +169,8 @@ require ("head.php");
 		<span class="ti-angle-up"></span>
 	</a>
 	<!-- /Back to Top -->
+
+
 	
 	<!-- Jquery Library-->
 	<script src="js/jquery-3.2.1.min.js"></script>

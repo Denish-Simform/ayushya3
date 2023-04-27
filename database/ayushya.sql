@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ayushya`
+-- Database: `ayushya3`
 --
 
 -- --------------------------------------------------------
@@ -26,6 +26,10 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `appointments`
 --
+
+CREATE database ayushya3;
+
+use ayushya3;
 
 CREATE TABLE `appointments` (
   `id` int(11) NOT NULL,

@@ -22,9 +22,9 @@ Responsive Style Sheet
     .card.card-no-border {
         margin-top: 20px;
     }    
-    .responsive-logo a{
+    /* .responsive-logo a{
         display: none;
-    }
+    } */
 }
 
 /* Max Width: 1024px */

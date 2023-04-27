@@ -65,3 +65,53 @@ function close1() {
     $("#exiPatient").hide();
 
 }
+
+// custom.js
+
+$(document).ready(function() {
+    // Fetch appointment data using AJAX when the page loads
+    $.ajax({
+        url: 'fetch-appointments.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            // Iterate over each appointment and add a row to the table
+            $.each(data, function(index, appointment) {
+                var row = '<tr>' +
+                    '<td>' + (index + 1) + '</td>' +
+                    '<td>' + appointment.name + '</td>' +
+                    '<td>' + appointment.gender + '</td>' +
+                    '<td>' + appointment.complaint + '</td>' +
+                    '<td>' +
+                        '<button class=" btn-primary btn-view p-1 border border-dark rounded" data-id="' + appointment.id + '"><a href="in-patient.php?id=' + appointment.id + '">Call In</a></button>' +
+                        '<button class="ml-1 btn-danger btn-edit p-1 border border-dark rounded" data-id="' + appointment.id + '"><a href="delete-patient.php?id=' + appointment.id + '">Delete</a></button>' +
+                        // '<button class="btn-delete" data-id="' + appointment.ID + '">Delete</button>' +
+                    '</td>' +
+                '</tr>';
+                $('#appointment-table-body').append(row);
+            });
+        },
+        error: function(xhr, status, error) {
+            // Handle any errors that occur during the AJAX call
+            console.error(error);
+        }
+    });
+
+    // $('#appointments-table').on('click', '.btn-view', function() {
+    //     var appointmentId = $(this).data('id');
+    //     console.log(appointmentId);
+    //     $.ajax({
+    //         url : "fetch-patient-data.php?id="+appointmentId,
+    //         method : "GET",
+    //         success : function(data) {
+
+    //         }
+    //     })
+    //     // Implement logic to display appointment edit form in a modal
+    // });
+
+    $('#appointments-table').on('click', '.btn-delete', function() {
+        var appointmentId = $(this).data('id');
+        // Implement logic to delete the appointment and remove it from the table
+    });
+});

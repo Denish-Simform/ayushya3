@@ -11,7 +11,7 @@
             <ul class="collapse list-unstyled" id="nav-patients">
                 <li>
                     <a href="add-patient.html">Add Patient</a>
-                </li>
+                </li> 
                 <li>
                     <a href="patients.html">All Patients</a>
                 </li>

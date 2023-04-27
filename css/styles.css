@@ -155,13 +155,37 @@ a:focus {
 	opacity: 0.6;
 }
 
-.table td,
 .table th {
 	vertical-align: middle;
 	text-align: center;
 	padding: .75rem;
 }
 
+.table td {
+	vertical-align: middle;
+	text-align: center;
+	padding: 5px;
+}
+
+#sr-no-th {
+	width: 50px;
+}
+
+#patient-name-th {
+	width: 150px;
+}
+
+#patient-gender-th {
+	width: 50px;
+}
+
+#patient-complaint-th {
+	width: 300px;
+}
+
+#action-th {
+	width: 150px;
+}
 
 form .row>[class^=col] {
 	padding-top: .5rem !important;
