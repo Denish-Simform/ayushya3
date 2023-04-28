@@ -27,6 +27,13 @@ Responsive Style Sheet
     } */
 }
 
+@media print {
+    #print-btn,
+    #submit-btn {
+      display: none;
+    }
+  }
+
 /* Max Width: 1024px */
 @media (min-width: 992px) and (max-width: 1024px) {
     a[aria-expanded="false"]::before,

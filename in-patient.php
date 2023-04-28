@@ -60,11 +60,19 @@ require ("head.php");
                                     if(isset($_GET["id"])) {
                                         require("connection.php");
                                         $id = $_GET["id"];
-                                        $query = "select name, dob, gender, address, phone, email, bloodgroup from patient where id = $id";
+                                        $update_token = "update token set status = 1 where ap_id = $id";
+                                        $conn->query($update_token);
+                                        $query = "select p.name, p.dob, p.gender, p.address, p.phone, p.email, p.bloodgroup, t.id as token from patient p join appointments a on a.p_id = p.id join token t on a.id = t.ap_id where a.id = $id and t.status=1";
                                         $res = $conn->query($query);
                                         $row = $res->fetch_assoc();
                                 ?>
                                     <tbody>
+                                        <tr>											
+                                            <td><strong>Token Number</strong></td>
+                                            <td><?php
+                                                echo $row["token"];
+                                            ?></td>
+                                        </tr>
                                         <tr>											
                                             <td><strong>Name</strong></td>
                                             <td><?php
@@ -132,7 +140,7 @@ require ("head.php");
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $query = "select u.name as doc_name, date(a.created_at) as visit_date, a.complaint as complaint from appointments a join user u on a.doc_id = u.id where date(a.created_at) <> current_date()";
+                                        $query = "select distinct a.id as ap_id, u.name as doc_name, date(a.created_at) as visit_date, a.complaint as complaint from appointments a join user u on a.doc_id = u.id where a.p_id = $id and a.status = 0";
                                         $res = $conn->query($query);
                                         while($row = $res->fetch_assoc()) {
                                     ?>
@@ -140,16 +148,21 @@ require ("head.php");
                                             <?php echo "<td>" . $row["doc_name"] . "</td>"?>
                                             <?php echo "<td>" . $row["visit_date"] . "</td>"?>
                                             <?php echo "<td>" . $row["complaint"] . "</td>"?>
-                                            <?php $date = $row["visit_date"]; echo "<td><button class='btn-success p-1' onclick='show-prev-visit($date)'>Show</button></td>"?>
+                                            <?php $ap_id = $row["ap_id"]; echo "<td><button class='btn-success p-1' onclick='show_prev_visit($ap_id)'>Show</button></td>"?>
                                         </tr>
-                                    <?php        
-                                        }
-                                    ?>						
+                                    						
                                     </tbody>
                                 </table>
                             </div>
+                        <?php        
+                            }
+                        ?>
                         </div>
                     </div>
+                </div>
+                <div class="row d-flex justify-content-around mt-4">
+                    <button class="btn btn-primary"><a href="add-prescription.php?id=<?php echo $id?>">Add Prescription</a></button>
+                    <button class="btn btn-success"><a href="out-patient.php?id=<?php echo $id?>">Check Out</a></button>
                 </div>
             </div>            
         </div>
@@ -157,6 +170,56 @@ require ("head.php");
     <?php
         }
     ?>
+    <!-- modal Add Prescription -->
+	<div class="modal proclinic-modal-lg" id="previous-appointment-modal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lorvens">
+			<div class="modal-content proclinic-box-shadow2">
+				<div class="modal-header">
+					<h5 class="modal-title"><b id="patient_name"></b></h5>
+					<span class="ti-close" data-dismiss="modal" aria-label="Close" onclick="close1()">
+					</span>
+				</div>
+				<div class="modal-body ">
+                    <div class="sub-head-modal d-flex justify-content-between">
+                        <p>Appointment Date: <b id="prev_appoint_date"></b></p>
+                        <p>Doctor Name: <b id="doctor_name"></b></p>
+                    </div>
+                    <div class="sub-head-modal d-flex justify-content-between">
+                        <p>Appointment Id: <b id="prev_appoint_id"></b></p>
+                    </div>
+                    <div class="container d-flex p-2 justify-content-between mt-3">
+                        <div class="border border-dark p-2">
+                            <h5>Blood Pressure</h5>
+                            <p><h3 id="bloodpressure"></h3></p>
+                        </div>
+                        <div class="border border-dark p-2">
+                            <h5>Height</h5>
+                            <p><h3 id="pheight"></h3></p>
+                        </div>
+                        <div class="border border-dark p-2">
+                            <h5>Weight</h5>
+                            <p><h3 id="pweight"></h3></p>
+                        </div>
+                    </div>
+                    <div class="container p-2">
+                        <div class="d-flex mt-3">
+                            <h4><b>Complaint: </b></h4>
+                            <h4 id="complaint"></h4>
+                        </div>
+                        <div class="d-flex mt-3">
+                            <h4><b>Findings: </b></h4>
+                            <h4 id="findings"></h4>
+                        </div>
+                        <div class="d-flex mt-3">
+                            <h4><b>Advice: </b></h4>
+                            <h4 id="advice"></h4>
+                        </div>
+                    </div>
+					<input type="button" class="w-25 btn-danger p-1 mt-4" value="Close" id="prev_desc_modal">
+				</div>
+			</div>
+		</div>
+	</div>
 <!-- Jquery Library-->
 <script src="js/jquery-3.2.1.min.js"></script>
 <!-- Popper Library-->

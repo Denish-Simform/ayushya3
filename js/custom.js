@@ -59,11 +59,36 @@ $(".btnnext").on('click', function () {
 $(".btnexist").on('click', function () {
     $("#exiPatient").show();
 });
+$("#prev_desc_modal").on('click', function () {
+    $("#previous-appointment-modal").hide();
+    $("#prev_appoint_date").empty();
+    $("#patient_name").empty();
+    $("#doctor_name").empty();
+    $("#prev_appoint_id").empty();
+    $("#bloodpressure").empty();
+    $("#pheight").empty();
+    $("#pweight").empty();
+    $("#complaint").empty();
+    $("#findings").empty();
+    $("#advice").empty(); 
+});
+
 function close1() {
     $("#newPatient").hide();
     $("#newPatient2").hide();
     $("#exiPatient").hide();
-
+    $("#previous-appointment-modal").hide();
+    $("#previous-appointment-modal").hide();
+    $("#prev_appoint_date").empty();
+    $("#patient_name").empty();
+    $("#doctor_name").empty();
+    $("#prev_appoint_id").empty();
+    $("#bloodpressure").empty();
+    $("#pheight").empty();
+    $("#pweight").empty();
+    $("#complaint").empty();
+    $("#findings").empty();
+    $("#advice").empty(); 
 }
 
 // custom.js
@@ -115,3 +140,51 @@ $(document).ready(function() {
         // Implement logic to delete the appointment and remove it from the table
     });
 });
+
+function show_prev_visit(ap_id) {
+    let id = ap_id;
+    // console.log(id);
+    $("#previous-appointment-modal").show();
+    $.ajax({
+        url : "fetch-prev-appointments.php",
+        method : "POST",
+        data: {
+            id : id
+        },
+        success : function (data) {
+            data = JSON.parse(data);
+            console.log(data);
+            $("#prev_appoint_date").append(data["date"]);
+            $("#patient_name").append(data["patient_name"]);
+            $("#doctor_name").append(data["doctor_name"]);
+            $("#prev_appoint_id").append(data["ap_id"]);
+            $("#bloodpressure").append(data["parameter"]["bp"]);
+            $("#pheight").append(data["parameter"]["height"]);
+            $("#pweight").append(data["parameter"]["weight"]);
+            $("#complaint").append(data["complaint"]);
+            $("#findings").append(data["findings"]);
+            $("#advice").append(data["advice"]); 
+        }
+    })
+}
+
+const form = document.querySelector('#prescription-form');
+const printBtn = document.querySelector('#print-btn');
+
+form.addEventListener('input', () => {
+  // Check if any input field has been filled out
+  const inputs = form.querySelectorAll('input');
+  const isFilled = Array.from(inputs).some(input => input.value.trim() !== '');
+
+  // Enable the print button if any input field has been filled out
+  printBtn.disabled = !isFilled;
+});
+
+printBtn.addEventListener('click', () => {
+    let ap_id = $("#ap_id").val();
+    window.print();
+    window.onafterprint = function () {
+        window.location.href = "add-prescription.php?id="+ap_id;
+    }
+});
+

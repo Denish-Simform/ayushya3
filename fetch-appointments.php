@@ -3,7 +3,7 @@
 include("connection.php");
 
 // Define a query to fetch appointment data from the appointment table
-$query = "SELECT a.p_id as id, p.name as name, p.gender as gender, a.complaint as complaint FROM appointments a join patient p on p.id=a.p_id";
+$query = "SELECT a.p_id as id, p.name as name, p.gender as gender, a.complaint as complaint FROM appointments a join patient p on p.id=a.p_id and a.status = 1";
 
 // Execute the query and store the results in a variable
 $result = $conn->query($query);
